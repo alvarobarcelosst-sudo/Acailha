@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a050d">
+<meta name="description" content="Açaílha Lanches — Seu momento de sabor começa aqui. Açaí, lanches, cartão digital e pedidos online via WhatsApp.">
+<title>Açaílha Lanches | Cartão Digital e Pedidos</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-dark: #08050b;
+  --surface-dark: #120b18;
+  --surface-card: #1c1226;
+  --purple-main: #8a1c66;
+  --purple-deep: #5e1045;
+  --purple-accent: #b82888;
+  --green-detail: #25d366;
+  --green-hover: #1fbe59;
+  --white: #ffffff;
+  --text-muted: #b1a7b8;
+  --border-subtle: rgba(184, 40, 136, 0.22);
+  --border-hover: rgba(184, 40, 136, 0.55);
+  --shadow-glow: rgba(138, 28, 102, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(138, 28, 102, 0.35), transparent 45%),
+    radial-gradient(circle at 50% 110%, rgba(37, 211, 102, 0.08), transparent 40%),
+    linear-gradient(180deg, #050307 0%, #0d0714 50%, #050307 100%);
+}
+
+/* Malha sutil de fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black 20%, transparent 90%);
+}
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  overflow: hidden;
+  padding: 32px 22px 24px;
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(24, 15, 33, 0.95), rgba(12, 7, 18, 0.98));
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(138, 28, 102, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--green-detail), var(--purple-accent), transparent);
+}
+
+.brand-mark {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2.5px solid var(--purple-accent);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(138, 28, 102, 0.25), #0b0611);
+  box-shadow: 
+    0 0 0 6px rgba(184, 40, 136, 0.12),
+    0 12px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.brand-mark:hover {
+  transform: scale(1.03);
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+}
+
+.brand-mark img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.brand-name {
+  font-size: 27px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+
+.brand-name span {
+  color: var(--purple-accent);
+  background: linear-gradient(135deg, #e652ba, #b82888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 24px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(37, 211, 102, 0.08);
+  border: 1px solid rgba(37, 211, 102, 0.25);
+  color: #e2fbe9;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-detail);
+  box-shadow: 0 0 10px var(--green-detail);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.section-label {
+  margin: 0 4px 12px;
+  text-align: left;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--white);
+  text-decoration: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  background: linear-gradient(135deg, rgba(184, 40, 136, 0.15), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--shadow-glow);
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card strong {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card small {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover .icon {
+  transform: scale(1.05);
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Estilo do Botão Principal - WhatsApp */
+.primary-whatsapp {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.16), rgba(184, 40, 136, 0.12));
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.12);
+}
+
+.primary-whatsapp:hover {
+  border-color: var(--green-detail);
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.24), rgba(184, 40, 136, 0.18));
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.22);
+}
+
+.primary-whatsapp .icon {
+  background: rgba(37, 211, 102, 0.18);
+  border-color: rgba(37, 211, 102, 0.35);
+  color: var(--green-detail);
+}
+
+.primary-whatsapp strong {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.primary-whatsapp small {
+  color: #a8eec1;
+}
+
+/* Estilos dos outros cards */
+.instagram .icon {
+  color: #e1306c;
+  background: rgba(225, 48, 108, 0.12);
+  border-color: rgba(225, 48, 108, 0.25);
+}
+
+.review .icon {
+  color: #fbbc05;
+  background: rgba(251, 188, 5, 0.12);
+  border-color: rgba(251, 188, 5, 0.25);
+}
+
+.rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 3px;
+  color: #fbbc05;
+  font-size: 11px;
+}
+
+.maps .icon {
+  color: #ea4335;
+  background: rgba(234, 67, 53, 0.12);
+  border-color: rgba(234, 67, 53, 0.25);
+}
+
+/* Seção de Informações */
+.info {
+  margin-top: 22px;
+  padding: 18px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(18, 11, 24, 0.6);
+  text-align: left;
+}
+
+.info-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.info-row + .info-row {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mini {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  color: var(--purple-accent);
+  background: rgba(184, 40, 136, 0.12);
+  border: 1px solid rgba(184, 40, 136, 0.2);
+}
+
+.mini svg {
+  width: 18px;
+  height: 18px;
+}
+
+.info b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--white);
+}
+
+.info span {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  display: block;
+}
+
+footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: #7d7285;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* Ajustes para telas bem pequenas */
+@media (max-width: 360px) {
+  body {
+    padding: 12px 8px;
+  }
+  .container {
+    padding: 24px 14px 18px;
+  }
+  .card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+  <div class="top-line"></div>
+
+  <!-- Logo Açaílha Lanches -->
+  <div class="brand-mark" aria-label="Açaílha Lanches">
+    <img src="logo.png" alt="Açaílha Lanches Logo">
+  </div>
+
+  <h1 class="brand-name">Açaílha <span>Lanches</span></h1>
+  <p class="tagline">Seu momento de sabor começa aqui.</p>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    Peça seu açaí e lanche pelo WhatsApp
+  </div>
+
+  <div class="section-label">Acesso rápido</div>
+
+  <section class="grid">
+
+    <!-- 1. Fazer pedido pelo WhatsApp -->
+    <a class="card primary-whatsapp"
+       href="https://wa.me/5548996888038?text=Ol%C3%A1%21%20Vim%20pelo%20cart%C3%A3o%20digital%20%2F%20cat%C3%A1logo%20da%20A%C3%A7a%C3%ADlha%20Lanches%20e%20gostaria%20de%20fazer%20um%20pedido."
+       target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M20 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-4.1A8.5 8.5 0 1 1 20 11.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.2 7.8c.2-.3.4-.3.7-.3h.6c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.6.7c.5 1 1.3 1.8 2.4 2.3l.7-.6c.2-.2.4-.2.7-.1l1.6.7c.3.1.4.3.4.5v.6c0 .3-.1.5-.3.7-.4.4-1 .6-1.6.5-2.8-.4-5.7-3.3-6.1-6.1-.1-.6.1-1.2.5-1.6Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <strong>Fazer pedido pelo WhatsApp</strong>
+        <small>Atendimento e cardápio direto no app</small>
+      </div>
+    </a>
+
+    <!-- 2. Instagram -->
+    <a class="card instagram"
+       href="https://instagram.com/acailhalanches?vrfl=MXRtd25pbWxkcTJqcQ%3D%3D"
+       target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3.5" y="3.5" width="17" height="17" rx="4"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <strong>Instagram</strong>
+        <small>Acompanhe nossas novidades</small>
+      </div>
+    </a>
+
+    <!-- 3. Avaliar no Google -->
+    <a class="card review"
+       href="https://search.google.com/local/writereview?placeid=ChIJp71dE8hrJ5URMO6E8jJnaLw"
+       target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <strong>Avaliar no Google</strong>
+        <small>Sua avaliação é muito importante para nós</small>
+        <div class="rating-badge">
+          ★ ★ ★ ★ ★ <span style="font-size:9px; color:var(--text-muted); margin-left:2px;">(Visual)</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 4. Como chegar -->
+    <a class="card maps"
+       href="https://www.google.com/maps/search/?api=1&query=Estr.+Ver.+Onildo+Lemos%2C+520%2C+Ingleses+do+Rio+Vermelho%2C+Florian%C3%B3polis+-+SC%2C+88058-700"
+       target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s7-7.4 7-12A7 7 0 0 0 5 9c0 4.6 7 12 7 12Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <strong>Como chegar</strong>
+        <small>Encontre nossa loja</small>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- Informações da Loja -->
+  <section class="info">
+    <div class="info-row">
+      <div class="mini">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21s7-7.4 7-12A7 7 0 0 0 5 9c0 4.6 7 12 7 12Z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+      </div>
+      <div>
+        <b>Endereço</b>
+        <span>Estr. Ver. Onildo Lemos, 520<br>Ingleses do Rio Vermelho — Florianópolis/SC<br>CEP 88058-700</span>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="mini">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <polyline points="12 7 12 12 15 15"/>
+        </svg>
+      </div>
+      <div>
+        <b>Horário de funcionamento</b>
+        <span>Consulte nosso horário de funcionamento atualizado pelo Google ou fale conosco pelo WhatsApp.</span>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="mini">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div>
+        <b>Contato & Instagram</b>
+        <span>WhatsApp: (48) 99688-8038<br>Instagram: @acailhalanches</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    AÇAÍLHA LANCHES<br>
+    Ingleses • Florianópolis/SC
+  </footer>
+</main>
+</body>
+</html>
